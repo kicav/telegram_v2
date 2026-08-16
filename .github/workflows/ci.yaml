@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+      - run: python -m pip install -U pip
+      - run: pip install -e ".[dev]"
+      - run: python scripts/quality_gate.py
+      - run: ruff check src tests scripts
+      - run: pytest -q

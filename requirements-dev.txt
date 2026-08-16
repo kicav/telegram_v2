@@ -1,0 +1,7 @@
+-r requirements.txt
+pytest>=8.3
+pytest-cov>=6
+ruff>=0.9
+Nuitka>=2.6
+ordered-set>=4.1
+zstandard>=0.23
